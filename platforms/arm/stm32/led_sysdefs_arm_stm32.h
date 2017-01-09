@@ -53,6 +53,8 @@ typedef volatile       uint8_t RwReg; /**< Read-Write 8-bit register (volatile u
 
 #define FASTLED_NO_PINMAP
 
+#ifndef F_CPU
 #define F_CPU 72000000
+#endif
 
 #endif
