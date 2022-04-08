@@ -32,9 +32,14 @@
 #define sei() __enable_irq(); __enable_fault_irq();
 #endif
 
-#ifdef __STM32F1__
+#if defined(__STM32F1__)
 #define cli() nvic_globalirq_disable()
 #define sei() nvic_globalirq_enable()
+#endif
+
+#if defined(STM32F1)
+#define cli() noInterrupts();
+#define sei() interrupts();
 #endif
 
 // pgmspace definitions

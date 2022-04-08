@@ -65,7 +65,7 @@ protected:
     }
   }
 
-#ifdef __STM32F1__
+#if defined(__STM32F1__) || defined(STM32F1)
 
 #ifdef __cplusplus
   #define   __I     volatile             /*!< Defines 'read only' permissions                 */

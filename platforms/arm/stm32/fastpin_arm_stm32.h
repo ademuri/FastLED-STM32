@@ -95,7 +95,7 @@ _DEFPIN_ARM(19, 2, A);
 
 #define HAS_HARDWARE_PIN_SUPPORT
 
-#endif
+#endif  // SPARK
 
 #if defined(__STM32F1__)
 #define _RD32(T) struct __gen_struct_ ## T { static __attribute__((always_inline)) inline gpio_reg_map* r() { return T->regs; } };
@@ -145,7 +145,52 @@ _DEFPIN_ARM(PB1, 1, B);
 
 #define HAS_HARDWARE_PIN_SUPPORT
 
-#endif
+#endif // __STM32F1__
+
+// Note: the STM32F103T8 definition incorrectly defines STM32F103xB, so limit the pins to only what the former has.
+#if defined(STM32F103xB)  // STM32DUINO
+#define _RD32(T) struct __gen_struct_ ## T { static __attribute__((always_inline)) inline volatile GPIO_TypeDef * r() { return T; } };
+#define _IO32(L) _RD32(GPIO ## L)
+
+_IO32(A); _IO32(B); _IO32(D);
+
+#define MAX_PIN 34
+_DEFPIN_ARM(PA_0, 0, A);
+_DEFPIN_ARM(PA_1, 1, A);
+_DEFPIN_ARM(PA_2, 2, A);
+_DEFPIN_ARM(PA_3, 3, A);
+_DEFPIN_ARM(PA_4, 4, A);
+_DEFPIN_ARM(PA_5, 5, A);
+_DEFPIN_ARM(PA_6, 6, A);
+_DEFPIN_ARM(PA_7, 7, A);
+_DEFPIN_ARM(PA_8, 8, A);
+_DEFPIN_ARM(PA_9, 9, A);
+_DEFPIN_ARM(PA_10, 10, A);
+_DEFPIN_ARM(PA_11, 11, A);
+_DEFPIN_ARM(PA_12, 12, A);
+_DEFPIN_ARM(PA_13, 13, A);
+_DEFPIN_ARM(PA_14, 14, A);
+_DEFPIN_ARM(PA_15, 15, A);
+
+_DEFPIN_ARM(PB_0, 0, B);
+_DEFPIN_ARM(PB_1, 1, B);
+_DEFPIN_ARM(PB_2, 2, B);
+_DEFPIN_ARM(PB_3, 3, B);
+_DEFPIN_ARM(PB_4, 4, B);
+_DEFPIN_ARM(PB_5, 5, B);
+_DEFPIN_ARM(PB_6, 6, B);
+_DEFPIN_ARM(PB_7, 7, B);
+
+_DEFPIN_ARM(PD_0, 0, D);
+_DEFPIN_ARM(PD_1, 1, D);
+
+#define SPI_DATA PA_7
+#define SPI_CLOCK PA_5
+
+#define HAS_HARDWARE_PIN_SUPPORT
+
+#endif  // STM32F103xB
+
 
 #endif // FASTLED_FORCE_SOFTWARE_PINS
 
